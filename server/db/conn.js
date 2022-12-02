@@ -9,10 +9,15 @@ var CardsSchema = new Schema(
   { versionKey: false }
 );
 
-mongoose.connect('mongodb://localhost:27017/MTGCards');
+mongoose.connect('mongodb://mongodb-container:27017/MTGCards');
 var model = mongoose.model('mtgCards', CardsSchema, 'mtgCards');
 
 async function getCards(name) {
+  var entry = new model();
+  entry.name = "test3";
+  entry.id = "asd";
+  entry.imageUrl = " asdasd";
+  entry.save();
   return await model.find({ name: new RegExp(name, 'i') }).exec();
 }
 
