@@ -2,8 +2,18 @@
 require('dotenv').config({ path: './config.env' });
 
 const express = require('express');
+const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const cors = require('cors');
 const path = require('path');
+
+let credentials = null;
+try {
+  const privateKey = fs.readFileSync('/var/opt/ssl/ole-reimers.key');
+  const certificate = fs.readFileSync('/var/opt/ssl/ole-reimers.crt');
+  credentials = {key: privateKey, cert: certificate};
+} catch (e) {}
 
 const PORT = process.env.PORT || 80;
 const app = express();
@@ -68,7 +78,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-// start the Express server
-app.listen(PORT, () => {
-  console.log(`Server is running on port: ${PORT}`);
-});
+const httpServer = http.createServer(app);
+httpServer.listen(80);
+
+if (credentials) {
+  const httpsServer = https.createServer(credentials, app);
+  httpsServer.listen(443);
+}
