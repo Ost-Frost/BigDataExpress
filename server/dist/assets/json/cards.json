@@ -1,0 +1,27 @@
+[
+    {
+        "name": "The Corona Look",
+        "rarity": 1,
+        "assetUrl": "assets/cards/Corona.png"
+    },
+    {
+        "name": "Yllwalyn & Victoria",
+        "rarity": 1,
+        "assetUrl": "assets/cards/Victoria.png"
+    },
+    {
+        "name": "Astolfo",
+        "rarity": 2,
+        "assetUrl": "assets/cards/Astolfo.png"
+    },
+    {
+        "name": "The Biggest Fan",
+        "rarity": 2,
+        "assetUrl": "assets/cards/Biggest.png"
+    },
+    {
+        "name": "The Weeb",
+        "rarity": 3,
+        "assetUrl": "assets/cards/Weeb.png"
+    }
+]
