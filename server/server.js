@@ -8,7 +8,7 @@ const fs = require('fs');
 const cors = require('cors');
 const path = require('path');
 
-process.env.TZ = 'Europe/Berline' 
+process.env.TZ = 'Europe/Berlin' 
 
 let credentials = null;
 try {
