@@ -8,6 +8,8 @@ const fs = require('fs');
 const cors = require('cors');
 const path = require('path');
 
+process.env.TZ = 'Europe/Berline' 
+
 let credentials = null;
 try {
   const privateKey = fs.readFileSync('/var/opt/ssl/ole-reimers.key');
@@ -65,7 +67,7 @@ app.get('/release/nextReleaseDate', (req, res) => {
 
 for (let releaseDateIndex = 0; releaseDateIndex < releaseDates.length; releaseDateIndex++) {
   const today = new Date();
-  
+
   if (today >= releaseDates[releaseDateIndex]) {
     app.get('/release/' + releaseDateIndex, (req, res) => {
       res.sendFile(path.join(__dirname, 'release', releaseDateIndex + '.json'));
