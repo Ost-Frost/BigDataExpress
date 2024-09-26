@@ -31,9 +31,9 @@ const releaseDates = [
   new Date(2024, 9, 25, 0, 0, 0),
 ]
 
-const today = new Date();
-
 app.get('/release/maxCardIndex', (req, res) => {
+  const today = new Date();
+
   for (let releaseDateIndex = 0; releaseDateIndex < releaseDates.length; releaseDateIndex++) {
     if (today < releaseDates[releaseDateIndex]) {
       res.send({
@@ -48,6 +48,8 @@ app.get('/release/maxCardIndex', (req, res) => {
 });
 
 app.get('/release/nextReleaseDate', (req, res) => {
+  const today = new Date();
+
   for (let releaseDateIndex = 0; releaseDateIndex < releaseDates.length; releaseDateIndex++) {
     if (today < releaseDates[releaseDateIndex]) {
       res.send({
@@ -62,6 +64,8 @@ app.get('/release/nextReleaseDate', (req, res) => {
 });
 
 for (let releaseDateIndex = 0; releaseDateIndex < releaseDates.length; releaseDateIndex++) {
+  const today = new Date();
+  
   if (today >= releaseDates[releaseDateIndex]) {
     app.get('/release/' + releaseDateIndex, (req, res) => {
       res.sendFile(path.join(__dirname, 'release', releaseDateIndex + '.json'));
