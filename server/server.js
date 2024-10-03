@@ -65,18 +65,24 @@ app.get('/release/nextReleaseDate', (req, res) => {
   });
 });
 
-for (let releaseDateIndex = 0; releaseDateIndex < releaseDates.length; releaseDateIndex++) {
-  const today = new Date();
-
-  if (today >= releaseDates[releaseDateIndex]) {
-    app.get('/release/' + releaseDateIndex, (req, res) => {
+for (let releaseDateIndex = 0; releaseDateIndex < releaseDates.length; releaseDateIndex++) { 
+  app.get('/release/' + releaseDateIndex, (req, res) => {
+    const today = new Date();
+    if (today >= releaseDates[releaseDateIndex]) {
       res.sendFile(path.join(__dirname, 'release', releaseDateIndex + '.json'));
-    });
+    } else {
+      res.sendStatus(404);
+    }
+  });
 
-    app.get('/releaseAssets/' + releaseDateIndex + '.png', (req, res) => {
+  app.get('/releaseAssets/' + releaseDateIndex + '.png', (req, res) => {
+    const today = new Date();
+    if (today >= releaseDates[releaseDateIndex]) {
       res.sendFile(path.join(__dirname, 'release', 'releaseAssets', releaseDateIndex + '.png'));
-    });
-  }
+    } else {
+      res.sendStatus(404);
+    }
+  });
 }
 
 // angular
