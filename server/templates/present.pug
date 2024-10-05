@@ -1,0 +1,24 @@
+body
+    p Hiii, danke dass du mir die Suche nach deinem nächsten Geburtstagsgeschenk vereinfachst!
+    br
+    p Du wirst hoffentlich schon bald stolzer Besitzer hiervon sein:
+    p 
+        = amount + "x " + name
+    if data.selectable1Name
+        p 
+            = selectable1Name + ": " + selectable1
+    if data.selectable2Name
+        p 
+            = selectable2Name + ": " + selectable2
+    if message != ""
+        p Deine Nachricht:
+        p 
+            = message
+    br
+    p Falls du dich umentscheidest und doch etwas anderes zu deinem Geburtstag möchtest, schreib mir doch bitte eine Nachricht.
+    br
+    p Liebe Grüße
+    p Ole
+    
+        
+        

@@ -1,0 +1,26 @@
+body
+    p Vielen Dank für deine Bestellung im Ole Reimers Shop!
+    br
+    p Hier eine Zusammenfassung deiner Bestellung:
+    p 
+        = amount + "x " + name
+    if data.selectable1Name
+        p 
+            = selectable1Name + ": " + selectable1
+    if data.selectable2Name
+        p 
+            = selectable2Name + ": " + selectable2
+    p 
+        = "Preis: " + (price * amount).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })
+    if message != ""
+        p Deine Nachricht:
+        p 
+            = message
+    br
+    p Ich werde dich bald zu deiner Bestellung benachrichtigen! 
+    br
+    p Danke und viele Grüße
+    P Ole
+    
+        
+        
