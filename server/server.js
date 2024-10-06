@@ -105,6 +105,9 @@ function validateEmail(email) {
   return regex.test(email);
 }
 
+let ordersByIp = {};
+let orders = 0;
+
 app.post('/order', (req, res) => {
   if (!password) { res.sendStatus(500); return; }
   if (!compileOrderTemplate) { res.sendStatus(500); return; }
@@ -128,6 +131,28 @@ app.post('/order', (req, res) => {
   if (typeof data.price != "number" || typeof data.amount != "number" || typeof data.name != "string" || typeof data.message != "string") {
     res.status(400).json({
       message: "Bitte gib gültige Werte ein."
+    });
+    return;
+  }
+
+  if (typeof ordersByIp[req.ip] !== "undefined") {
+    ordersByIp[req.ip]++;
+    if (ordersByIp[req.ip] >= 5) {
+      res.status(429).json({
+        message: "Du hast diese Funktion heute schon zu oft verwendet. Bitte probier es morgen nochmal."
+      });
+      return;
+    }
+  } else {
+    ordersByIp[req.ip] = 0;
+    setTimeout(() => delete ordersByIp[req.ip], 86400000);
+  }
+
+  if (orders === 0) setTimeout(() => orders = 0, 86400000)
+  orders++;
+  if (orders >= 15) {
+    res.status(429).json({
+      message: "Diese Funktion ist zur Zeit nicht verfügbar. Bitte probier es morgen nochmal."
     });
     return;
   }
